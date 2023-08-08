@@ -56,6 +56,17 @@ public sealed class Validated<F, S>
         return SelectSuccess(selector);
     }
 
+    public override bool Equals(object? obj)
+    {
+        return obj is Validated<F, S> validated &&
+               EqualityComparer<Validated<F, S>.IValidation>.Default.Equals(imp, validated.imp);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(imp);
+    }
+
     private sealed class Success : IValidation
     {
         private readonly S success;
@@ -63,6 +74,17 @@ public sealed class Validated<F, S>
         public Success(S success)
         {
             this.success = success;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Validated<F, S>.Success success &&
+                   EqualityComparer<S>.Default.Equals(this.success, success.success);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(success);
         }
 
         public T Match<T>(
@@ -80,6 +102,17 @@ public sealed class Validated<F, S>
         public Failure(F failure)
         {
             this.failure = failure;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Validated<F, S>.Failure failure &&
+                   EqualityComparer<F>.Default.Equals(this.failure, failure.failure);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(failure);
         }
 
         public T Match<T>(
