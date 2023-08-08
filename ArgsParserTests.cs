@@ -53,4 +53,23 @@ public sealed class ArgsParserTests
                 new TestConfig(true, 8080, "/usr/logs")),
             actual);
     }
+
+    [Fact]
+    public void FailToParseConfig()
+    {
+        var sut = new ArgsParser<bool, int, string, TestConfig>(
+            new BoolParser('l'),
+            new IntParser('p'),
+            new StringParser('d'),
+            (b, i, s) => new TestConfig(b, i, s));
+
+        var actual = sut.TryParse("-p aityaity");
+
+        Assert.True(actual.Match(
+            onFailure: ss => ss.Contains("Expected integer for flag '-p', but got \"aityaity\"."),
+            onSuccess: _ => false));
+        Assert.True(actual.Match(
+            onFailure: ss => ss.Contains("Missing value for flag '-d'."),
+            onSuccess: _ => false));
+    }
 }
