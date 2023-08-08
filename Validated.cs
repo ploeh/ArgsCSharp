@@ -194,6 +194,17 @@ public static class Validated
                 x => Succeed<F, Func<T2, T3, S>>((y, z) => map(x, y, z))));
     }
 
+    public static Validated<F, Func<T2, S>> Apply<F, T1, T2, S>(
+        this Func<T1, T2, S> map,
+        Validated<F, T1> source,
+        Func<F, F, F> combine)
+    {
+        return Apply(
+            Succeed<F, Func<T1, T2, S>>((x, y) => map(x, y)),
+            source,
+            combine);
+    }
+
     public static Validated<F, Func<T2, T3, S>> Apply<F, T1, T2, T3, S>(
         this Func<T1, T2, T3, S> map,
         Validated<F, T1> source,
