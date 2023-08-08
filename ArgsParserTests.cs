@@ -11,7 +11,7 @@ public sealed class ArgsParserTests
         var l = new BoolParser('l').Parse(args).SelectFailure(s => new[] { s });
         var p = new IntParser('p').Parse(args).SelectFailure(s => new[] { s });
         Func<bool, int, (bool, int)> createTuple = (b, i) => (b, i);
-        Func<string[], string[], string[]> combineErrors = (s1, s2) => s1.Concat(s2).ToArray();
+        static string[] combineErrors(string[] s1, string[] s2) => s1.Concat(s2).ToArray();
 
         var actual = createTuple.Apply(l, combineErrors).Apply(p, combineErrors);
 
