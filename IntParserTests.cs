@@ -15,4 +15,17 @@ public sealed class IntParserTests
         var actual = sut.TryParse(candidate);
         Assert.Equal(Validated.Succeed<string, int>(expected), actual);
     }
+
+    [Theory]
+    [InlineData('t', "")]
+    [InlineData('q', "")]
+    [InlineData('f', "-l -p 8080 -d /usr/logs")]
+    public void TryParseMissing(char flagName, string candidate)
+    {
+        var sut = new IntParser(flagName);
+        var actual = sut.TryParse(candidate);
+        Assert.Equal(
+            Validated.Fail<string, int>($"Missing value for flag '-{flagName}'."),
+            actual);
+    }
 }
