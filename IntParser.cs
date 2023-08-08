@@ -1,27 +1,25 @@
 ﻿namespace Ploeh.Katas.ArgsCSharp;
 
-public sealed class BoolParser
+public sealed class IntParser
 {
     private readonly char flagName;
 
-    public BoolParser(char flagName)
+    public IntParser(char flagName)
     {
         this.flagName = flagName;
     }
 
-    public Validated<string, bool> Parse(string candidate)
+    public Validated<string, int> Parse(string candidate)
     {
         var idx = candidate.IndexOf($"-{flagName}");
-        if (idx < 0)
-            return Validated.Succeed<string, bool>(false);
 
         var nextFlagIdx = candidate.Substring(idx + 2).IndexOf('-');
         var bFlag = nextFlagIdx < 0
             ? candidate.Substring(idx + 2)
             : candidate.Substring(idx + 2, nextFlagIdx);
-        if (bool.TryParse(bFlag, out var b))
-            return Validated.Succeed<string, bool>(b);
+        if (int.TryParse(bFlag, out var i))
+            return Validated.Succeed<string, int>(i);
 
-        return Validated.Succeed<string, bool>(true);
+        throw new NotImplementedException();
     }
 }
