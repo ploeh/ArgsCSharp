@@ -9,7 +9,7 @@ public sealed class IntParser
         this.flagName = flagName;
     }
 
-    public Validated<string, int> Parse(string candidate)
+    public Validated<string, int> TryParse(string candidate)
     {
         var idx = candidate.IndexOf($"-{flagName}");
 

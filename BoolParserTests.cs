@@ -16,10 +16,10 @@ public sealed class BoolParserTests
     [InlineData('f', "-f", true)]
     [InlineData('f', "foo", false)]
     [InlineData('f', "", false)]
-    public void ParseSuccess(char flagName, string candidate, bool expected)
+    public void TryParseSuccess(char flagName, string candidate, bool expected)
     {
         var sut = new BoolParser(flagName);
-        var actual = sut.Parse(candidate);
+        var actual = sut.TryParse(candidate);
         Assert.Equal(Validated.Succeed<string, bool>(expected), actual);
     }
 }
