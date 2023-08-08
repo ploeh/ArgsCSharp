@@ -28,4 +28,18 @@ public sealed class IntParserTests
             Validated.Fail<string, int>($"Missing value for flag '-{flagName}'."),
             actual);
     }
+
+    [Theory]
+    [InlineData('l', "-l fadfdcip", "fadfdcip")]
+    [InlineData('g', "-g hnv14", "hnv14")]
+    [InlineData('p', "-l -p 80dt -d /usr/logs", "80dt")]
+    public void TryParseMalformed(char flagName, string candidate, string expected)
+    {
+        var sut = new IntParser(flagName);
+        var actual = sut.TryParse(candidate);
+        Assert.Equal(
+            Validated.Fail<string, int>(
+                $"""Expected integer for flag '-{flagName}', but got "{expected}"."""),
+            actual);
+    }
 }
