@@ -15,6 +15,7 @@ public sealed class BoolParserTests
     [InlineData('l', "nonsense", false)]
     [InlineData('f', "-f", true)]
     [InlineData('f', "foo", false)]
+    [InlineData('f', "", false)]
     public void ParseSuccess(char flagName, string candidate, bool expected)
     {
         var sut = new BoolParser(flagName);
