@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsCSharp", "ArgsCSharp.csproj", "{6D709045-5DA1-4DE3-ABB2-A0CDD64DB3CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D709045-5DA1-4DE3-ABB2-A0CDD64DB3CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D709045-5DA1-4DE3-ABB2-A0CDD64DB3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D709045-5DA1-4DE3-ABB2-A0CDD64DB3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D709045-5DA1-4DE3-ABB2-A0CDD64DB3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C134B4E-F150-4FCC-86E6-C4BB0ED643F8}
+	EndGlobalSection
+EndGlobal
