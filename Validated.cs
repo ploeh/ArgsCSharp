@@ -67,6 +67,11 @@ public sealed class Validated<F, S>
         return HashCode.Combine(imp);
     }
 
+    public override string ToString()
+    {
+        return imp.Match(f => $"Failure({f})", s => $"Success({s})");
+    }
+
     private sealed class Success : IValidation
     {
         private readonly S success;
