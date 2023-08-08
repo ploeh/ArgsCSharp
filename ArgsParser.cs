@@ -25,3 +25,39 @@ public sealed class ArgsParser<T1, T2, T>
         return s1.Concat(s2).ToArray();
     }
 }
+
+public sealed class ArgsParser<T1, T2, T3, T>
+{
+    private readonly IParser<T1> parser1;
+    private readonly IParser<T2> parser2;
+    private readonly IParser<T3> parser3;
+    private readonly Func<T1, T2, T3, T> create;
+
+    public ArgsParser(
+        IParser<T1> parser1,
+        IParser<T2> parser2,
+        IParser<T3> parser3,
+        Func<T1, T2, T3, T> create)
+    {
+        this.parser1 = parser1;
+        this.parser2 = parser2;
+        this.parser3 = parser3;
+        this.create = create;
+    }
+
+    public Validated<string[], T> TryParse(string candidate)
+    {
+        var x1 = parser1.TryParse(candidate).SelectFailure(s => new[] { s });
+        var x2 = parser2.TryParse(candidate).SelectFailure(s => new[] { s });
+        var x3 = parser3.TryParse(candidate).SelectFailure(s => new[] { s });
+        return create
+            .Apply(x1, CombineErrors)
+            .Apply(x2, CombineErrors)
+            .Apply(x3, CombineErrors);
+    }
+
+    private static string[] CombineErrors(string[] s1, string[] s2)
+    {
+        return s1.Concat(s2).ToArray();
+    }
+}

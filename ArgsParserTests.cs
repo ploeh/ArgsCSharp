@@ -30,4 +30,27 @@ public sealed class ArgsParserTests
 
         Assert.Equal(Validated.Succeed<string[], (bool, int)>((true, 8080)), actual);
     }
+
+    private sealed record TestConfig(bool DoLog, int Port, string Directory);
+
+    [Theory]
+    [InlineData("-l -p 8080 -d /usr/logs")]
+    [InlineData("-p 8080 -l -d /usr/logs")]
+    [InlineData("-d /usr/logs -l -p 8080")]
+    [InlineData(" -d  /usr/logs  -l  -p 8080  ")]
+    public void ParseConfig(string args)
+    {
+        var sut = new ArgsParser<bool, int, string, TestConfig>(
+            new BoolParser('l'),
+            new IntParser('p'),
+            new StringParser('d'),
+            (b, i, s) => new TestConfig(b, i, s));
+
+        var actual = sut.TryParse(args);
+
+        Assert.Equal(
+            Validated.Succeed<string[], TestConfig>(
+                new TestConfig(true, 8080, "/usr/logs")),
+            actual);
+    }
 }
