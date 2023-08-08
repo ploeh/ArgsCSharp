@@ -21,7 +21,10 @@ public sealed class ArgsParserTests
     [Fact]
     public void ParseBoolAndIntProofOfConcept()
     {
-        var sut = new ProofOfConceptParser();
+        var sut = new ArgsParser<bool, int, (bool, int)>(
+            new BoolParser('l'),
+            new IntParser('p'),
+            (b, i) => (b, i));
 
         var actual = sut.TryParse("-l -p 8080");
 
