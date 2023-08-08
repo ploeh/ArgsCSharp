@@ -2,9 +2,9 @@
 
 public sealed class BoolParser
 {
-    private readonly string flagName;
+    private readonly char flagName;
 
-    public BoolParser(string flagName)
+    public BoolParser(char flagName)
     {
         this.flagName = flagName;
     }

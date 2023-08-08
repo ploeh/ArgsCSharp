@@ -15,7 +15,7 @@ public sealed class BoolParserTests
     [InlineData("nonsense", false)]
     public void ParseSuccess(string candidate, bool expected)
     {
-        var sut = new BoolParser("l");
+        var sut = new BoolParser('l');
         var actual = sut.Parse(candidate);
         Assert.Equal(Validated.Succeed<string, bool>(expected), actual);
     }
