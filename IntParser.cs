@@ -1,6 +1,6 @@
 ﻿namespace Ploeh.Katas.ArgsCSharp;
 
-public sealed class IntParser
+public sealed class IntParser : IParser<int>
 {
     private readonly char flagName;
 

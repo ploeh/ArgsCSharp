@@ -1,6 +1,6 @@
 ﻿namespace Ploeh.Katas.ArgsCSharp;
 
-public sealed class BoolParser
+public sealed class BoolParser : IParser<bool>
 {
     private readonly char flagName;
 
