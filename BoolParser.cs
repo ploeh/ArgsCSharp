@@ -1,17 +1,16 @@
-﻿namespace Ploeh.Katas.ArgsCSharp
+﻿namespace Ploeh.Katas.ArgsCSharp;
+
+public sealed class BoolParser
 {
-    internal class BoolParser
+    private readonly string flagName;
+
+    public BoolParser(string flagName)
     {
-        private string v;
+        this.flagName = flagName;
+    }
 
-        public BoolParser(string v)
-        {
-            this.v = v;
-        }
-
-        internal Validated<string, bool> Parse(string v)
-        {
-            return Validated<string, bool>.Succeed(true);
-        }
+    public Validated<string, bool> Parse(string candidate)
+    {
+        return Validated<string, bool>.Succeed(true);
     }
 }
